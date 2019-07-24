@@ -218,3 +218,77 @@ public void moveZeroes1(int[] nums) {
 
 ----
 
+
+
+### [LeetCode-169 (Easy)](https://leetcode.com/problems/move-zeroes/)	**Majority Element**
+
+题意：给定一个大小为n的数组，找到其中的众数。众数是指在数组中出现次数**大于** `⌊ n/2 ⌋` 的元素。
+
+可以假设数组是非空的，并且给定的数组总是存在众数。
+
+示例:
+
+```html
+Input: [3,2,3]
+Output: 3
+```
+
+**解法一：**暴力搜索
+
+代码：
+
+```java
+public int majorityElement(int[] nums) {
+    int count = nums.length / 2;
+    for (int i = 0; i < nums.length; i++) {
+        int k = 0;
+        for (int j = i; j < nums.length; j++) {
+            if (nums[j] == nums[i]) {
+                k++;
+            }
+        }
+        if (k > count) {
+            return nums[i];
+        }
+    }
+    return -1;
+}
+```
+
+时间复杂度：O(n ^ 2)
+
+空间复杂度：O(1)
+
+**解法二：** 哈希表
+
+代码：
+
+```java
+public int majorityElement(int[] nums) {
+    Map<Integer, Integer> map = new LinkedHashMap<Integer, Integer>();
+    for (int i = 0; i < nums.length; i++) {
+        if (map.containsKey(nums[i])) {
+            Integer k = map.get(nums[i]);
+            map.put(nums[i], ++k);
+        } else {
+            map.put(nums[i], 1);
+        }
+    }
+		Integer maxKey = 0;
+    Integer maxValue = 0;
+    for (Map.Entry entry : map.entrySet()) {
+        if ((Integer) entry.getValue() > maxValue) {
+            maxValue = (Integer) entry.getValue();
+            maxKey = (Integer) entry.getKey();
+        }
+    }
+    return maxKey;
+}
+```
+
+时间复杂度：O(n)
+
+空间复杂度：O(n)
+
+
+
