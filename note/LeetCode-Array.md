@@ -66,9 +66,9 @@ public int maxArea(int[] height) {
 }
 ```
 
-时间复杂度：O($N^2$)
+*时间复杂度：O($N^2$)*
 
-空间复杂度：O(1)
+*空间复杂度：O(1)*
 
 
 
@@ -93,9 +93,9 @@ public int maxArea(int[] height) {
 }
 ```
 
-时间复杂度：O(N)
+*时间复杂度：O(N)*
 
-空间复杂度：O(1)
+*空间复杂度：O(1)*
 
 ----
 
@@ -146,6 +146,42 @@ public List<List<Integer>> threeSum(int[] nums) {
 ```
 
 *时间复杂度：O($N^2$)*
+
+*空间复杂度：O(1)*
+
+----
+
+### [LeetCode-26 (Easy)](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)	**Remove Duplicates from Sorted Array**
+
+题意：给定一个排序数组，**原地**删除重复元素，返回删除后数组长度。
+
+示例：
+
+```
+Given nums = [0,0,1,1,1,2,2,3,3,4],
+
+Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
+
+It doesn't matter what values are set beyond the returned length.
+```
+
+代码：
+
+```java
+public int removeDuplicates(int[] nums) {
+    if (nums == null || nums.length == 0) return 0;
+    int j = 0;
+    for (int i = 0; i < nums.length; i++) {
+        if (nums[i] != nums[j]) {
+            j++;
+            nums[j] = nums[i];
+        }
+    }
+    return j + 1;
+}
+```
+
+*时间复杂度：O(N)*
 
 *空间复杂度：O(1)*
 
@@ -255,9 +291,9 @@ public int majorityElement(int[] nums) {
 }
 ```
 
-时间复杂度：O(n ^ 2)
+*时间复杂度：O(n ^ 2)*
 
-空间复杂度：O(1)
+*空间复杂度：O(1)*
 
 **解法二：** 哈希表
 
@@ -286,9 +322,61 @@ public int majorityElement(int[] nums) {
 }
 ```
 
-时间复杂度：O(n)
+*时间复杂度：O(n)*
 
-空间复杂度：O(n)
+*空间复杂度：O(n)*
 
+----
 
+### [LeetCode-162 (Medium)](https://leetcode.com/problems/find-peak-element/)	**Find Peak Element**
 
+题意：峰值元素是指比它左右相邻数值都要大的数，给定一个数组nums，其中可能包含多个峰值元素，请找出其中一个。
+
+示例一：
+
+```
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+```
+
+示例二：
+
+```
+Input: nums = [1,2,1,3,5,6,4]
+Output: 1 or 5 
+Explanation: Your function can return either index number 1 where the peak element is 2, 
+             or index number 5 where the peak element is 6.
+```
+
+解法一：线性查找
+
+```java
+public int findPeakElement(int[] nums) {
+    for (int i = 0; i < nums.length - 1; i++) {
+        if (nums[i] > nums[i + 1])
+            return i;
+    }
+    return nums.length - 1;
+}
+```
+
+解法二：二分查找
+
+```java
+public int findPeakElement(int[] nums) {
+    int l = 0, r = nums.length - 1;
+    while (l < r) {
+    int mid = (l + r) / 2;
+        if (nums[mid] > nums[mid + 1])
+            r = mid;
+        else
+            l = mid + 1;
+    }
+    return l;
+}
+```
+
+*时间复杂度：O(logN)*
+
+*空间复杂度：O(1)*
